@@ -99,7 +99,7 @@ int main(int argc,char* argv[]){
 		printf("<SET COM PARAMETER FAILED>\n");
 		exit(0);
 	}
-	COMMTIMEOUTS timeouts={5,10,1,10,1};
+	COMMTIMEOUTS timeouts={0,20,1,10,1};
 	if(!setComTimeout(com_handle,timeouts)){
 		printf("<SET COM TIMEOUT FAILED>\n");
 		exit(0);
@@ -122,7 +122,7 @@ int main(int argc,char* argv[]){
 		printf("Hex send:%s\n",buf);
 		numOfWrite=writeToCom(com_handle,buf,numOfWrite);
 		printf("    %d    bytes sent!\n",numOfWrite);
-		numOfRead=readFromCom(com_handle,recv,128);
+		numOfRead=readFromCom(com_handle,recv,n);
 		memset(buf,0,250);
 		hexToAscii(recv,buf,n);
 		printf("UPS response :%s\n",buf);

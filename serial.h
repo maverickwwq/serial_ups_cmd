@@ -126,6 +126,7 @@ DWORD readFromCom(HANDLE hCom,char* dataPtr,DWORD numToRead){
 	OVERLAPPED overlapped={0,0,0,0,0};
 	DWORD numOfRead=0,error;
 	COMSTAT	comStat;
+	PurgeComm(hCom,PURGE_RXCLEAR);								//清除接收缓冲区
 	ClearCommError(hCom,&error,&comStat);								//清除IO错误
 	BOOL readState=ReadFile(hCom,dataPtr,numToRead,&numOfRead,&overlapped);
 	if(GetLastError() == ERROR_IO_PENDING){
